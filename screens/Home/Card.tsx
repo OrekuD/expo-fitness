@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, Image, Animated } from "react-native";
 import { RectButton, TouchableOpacity } from "react-native-gesture-handler";
 import { SharedElement } from "react-navigation-shared-element";
 import { SLIDE_WIDTH } from "../../constants/Layout";
+import { profiles } from "../../data/profiles";
 import { Exercise, RootStackParamList } from "../../types";
 
 interface CardProps {
@@ -23,21 +24,20 @@ const Card = ({ exercise, navigation, scrollX, index }: CardProps) => {
 
   const translateX = scrollX.interpolate({
     inputRange,
-    outputRange: [SLIDE_WIDTH * 0.2, 0, SLIDE_WIDTH * 0.2],
+    outputRange: [SLIDE_WIDTH * 0.1, 0, SLIDE_WIDTH * 0.1],
     extrapolate: "clamp",
   });
 
   const scale = scrollX.interpolate({
     inputRange,
-    outputRange: [1.2, 1, 1.2],
+    outputRange: [1.25, 1, 1.25],
     extrapolate: "clamp",
   });
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
+      <RectButton
         style={styles.card}
-        activeOpacity={1}
         onPress={() => navigation.push("Exercise", { exercise })}
       >
         <SharedElement id={`exercise ${label}`} style={styles.imageContainer}>
@@ -50,10 +50,32 @@ const Card = ({ exercise, navigation, scrollX, index }: CardProps) => {
             }}
           />
         </SharedElement>
-        <SharedElement id={`exercise ${numOfProjects}`} style={{ flex: 1 }}>
-          <View style={styles.content}></View>
-        </SharedElement>
-      </TouchableOpacity>
+        <View style={styles.cardContent}>
+          <SharedElement id={`exercise ${numOfProjects}`} style={{ flex: 1 }}>
+            <View style={styles.wrapper}></View>
+          </SharedElement>
+          <View style={styles.content}>
+            <View>
+              <Text style={styles.label}>{label}</Text>
+              <Text style={styles.projects}>{numOfProjects} projects</Text>
+            </View>
+            <View style={styles.profiles}>
+              {profiles.map((image, index) => (
+                <View
+                  style={{ ...styles.profile, zIndex: profiles.length - index }}
+                  key={index}
+                >
+                  <Image
+                    style={{ ...styles.profileImage }}
+                    resizeMode="cover"
+                    source={image}
+                  />
+                </View>
+              ))}
+            </View>
+          </View>
+        </View>
+      </RectButton>
     </View>
   );
 };
@@ -63,14 +85,13 @@ export default Card;
 const styles = StyleSheet.create({
   container: {
     width: SLIDE_WIDTH,
-    height: SLIDE_WIDTH * 1.3,
     alignItems: "center",
   },
   card: {
     width: SLIDE_WIDTH * 0.96,
-    height: "100%",
+    height: SLIDE_WIDTH * 1.3,
     backgroundColor: "white",
-    elevation: 1,
+    // elevation: 1,
     borderRadius: 10,
   },
   imageContainer: {
@@ -81,13 +102,52 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   image: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
   },
-  content: {
+  cardContent: {
     flex: 1,
     backgroundColor: "#f8f8f8",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
     position: "relative",
+  },
+  wrapper: {
+    flex: 1,
+    backgroundColor: "#f8f8f8",
+  },
+  content: {
+    ...StyleSheet.absoluteFillObject,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 3,
+  },
+  projects: {
+    fontSize: 12,
+    textTransform: "uppercase",
+    color: "grey",
+  },
+  profiles: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  profile: {
+    width: 42,
+    height: 42,
+    borderRadius: 20,
+    backgroundColor: "#f8f8f8",
+    marginLeft: -10,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+  profileImage: {
+    width: 35,
+    height: 35,
+    borderRadius: 20,
   },
 });

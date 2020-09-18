@@ -10,3 +10,10 @@ export interface Exercise {
   image: ImageRequireSource | null;
   numOfProjects: number | null;
 }
+
+export interface Project {
+  label: string;
+  image: ImageRequireSource | null;
+  numOfStars: number | null;
+  time: number | null;
+}
