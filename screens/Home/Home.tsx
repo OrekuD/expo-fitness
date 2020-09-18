@@ -14,14 +14,13 @@ const Home = ({ navigation }: StackScreenProps<RootStackParamList, "Home">) => {
     <View style={styles.container}>
       <Animated.FlatList
         data={[
-          { label: "first", image: null, numOfProjects: null },
+          { key: "90", label: "first", image: null, numOfProjects: null },
           ...exercises,
-          { label: "last", image: null, numOfProjects: null },
+          { key: "60", label: "last", image: null, numOfProjects: null },
         ]}
-        keyExtractor={({ label }) => label}
+        keyExtractor={({ key }) => key}
         horizontal
         snapToInterval={SLIDE_WIDTH}
-        decelerationRate="fast"
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],

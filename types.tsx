@@ -6,6 +6,7 @@ export type RootStackParamList = {
 };
 
 export interface Exercise {
+  key: string;
   label: string;
   image: ImageRequireSource | null;
   numOfProjects: number | null;

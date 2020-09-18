@@ -1,19 +1,15 @@
 import React from "react";
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from "@react-navigation/stack";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParamList } from "../types";
 import { Home, Exercise } from "../screens";
 
-const RootStack = createSharedElementStackNavigator<RootStackParamList>();
+const HomeStack = createSharedElementStackNavigator<RootStackParamList>();
 
-const RootNavigation = () => (
-  <RootStack.Navigator headerMode="none">
-    <RootStack.Screen name="Home" component={Home} />
-    <RootStack.Screen
+const HomeNavigation = () => (
+  <HomeStack.Navigator headerMode="none">
+    <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Screen
       name="Exercise"
       component={Exercise}
       options={{
@@ -28,18 +24,15 @@ const RootNavigation = () => (
       }}
       sharedElementsConfig={(route) => {
         const { exercise } = route.params;
-        return [
-          `exercise ${exercise.label}`,
-          `exercise ${exercise.numOfProjects}`,
-        ];
+        return [`image ${exercise.key}`, `content ${exercise.key}`];
       }}
     />
-  </RootStack.Navigator>
+  </HomeStack.Navigator>
 );
 
 const Navigation = () => (
   <NavigationContainer>
-    <RootNavigation />
+    <HomeNavigation />
   </NavigationContainer>
 );
 

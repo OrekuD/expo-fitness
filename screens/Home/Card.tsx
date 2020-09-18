@@ -15,7 +15,7 @@ interface CardProps {
 }
 
 const Card = ({ exercise, navigation, scrollX, index }: CardProps) => {
-  const { image, numOfProjects, label } = exercise;
+  const { image, numOfProjects, label, key } = exercise;
   const inputRange = [
     (index - 2) * SLIDE_WIDTH,
     (index - 1) * SLIDE_WIDTH,
@@ -40,7 +40,7 @@ const Card = ({ exercise, navigation, scrollX, index }: CardProps) => {
         style={styles.card}
         onPress={() => navigation.push("Exercise", { exercise })}
       >
-        <SharedElement id={`exercise ${label}`} style={styles.imageContainer}>
+        <SharedElement id={`image ${key}`} style={styles.imageContainer}>
           <Animated.Image
             source={image!}
             resizeMode="cover"
@@ -51,8 +51,8 @@ const Card = ({ exercise, navigation, scrollX, index }: CardProps) => {
           />
         </SharedElement>
         <View style={styles.cardContent}>
-          <SharedElement id={`exercise ${numOfProjects}`} style={{ flex: 1 }}>
-            <View style={styles.wrapper}></View>
+          <SharedElement id={`content ${key}`} style={{ flex: 1 }}>
+            <View style={styles.wrapper} />
           </SharedElement>
           <View style={styles.content}>
             <View>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     width: SLIDE_WIDTH * 0.96,
     height: SLIDE_WIDTH * 1.3,
     backgroundColor: "white",
-    // elevation: 1,
+    elevation: 2,
     borderRadius: 10,
   },
   imageContainer: {
@@ -107,12 +107,13 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
     position: "relative",
   },
   wrapper: {
     flex: 1,
     backgroundColor: "#f8f8f8",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   content: {
     ...StyleSheet.absoluteFillObject,
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
     marginBottom: 3,
+    textTransform: "capitalize",
   },
   projects: {
     fontSize: 12,

@@ -24,7 +24,7 @@ const Exercise = ({
   navigation,
 }: StackScreenProps<RootStackParamList, "Exercise">) => {
   const {
-    exercise: { image, label, numOfProjects },
+    exercise: { image, key, numOfProjects },
   } = params;
   const translateX = useRef(new Animated.Value(width * 0.8)).current;
   const { top } = useSafeAreaInsets();
@@ -67,12 +67,12 @@ const Exercise = ({
       >
         <Ionicons name="ios-close" size={35} />
       </RectButton>
-      <SharedElement id={`exercise ${label}`}>
+      <SharedElement id={`image ${key}`}>
         <Image source={image!} resizeMode="cover" style={styles.image} />
       </SharedElement>
       <View style={{ flex: 1 }}>
-        <SharedElement id={`exercise ${numOfProjects}`} style={{ flex: 1 }}>
-          <View style={{ flex: 1, backgroundColor: "#f8f8f8" }}></View>
+        <SharedElement id={`content ${key}`} style={{ flex: 1 }}>
+          <View style={{ flex: 1, backgroundColor: "#f8f8f8" }} />
         </SharedElement>
         <View style={styles.content}>
           <FlatList
