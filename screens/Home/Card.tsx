@@ -1,7 +1,7 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Text, View, StyleSheet, Image, Animated } from "react-native";
-import { RectButton, TouchableOpacity } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 import { SharedElement } from "react-navigation-shared-element";
 import { SLIDE_WIDTH } from "../../constants/Layout";
 import { profiles } from "../../data/profiles";

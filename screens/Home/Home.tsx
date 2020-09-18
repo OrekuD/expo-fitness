@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import React, { useRef } from "react";
-import { Text, View, StyleSheet, FlatList, Animated } from "react-native";
+import { View, StyleSheet, Animated } from "react-native";
 import { SLIDE_WIDTH, width } from "../../constants/Layout";
 import { exercises } from "../../data/exercises";
 import { RootStackParamList } from "../../types";

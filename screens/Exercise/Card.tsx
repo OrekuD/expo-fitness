@@ -1,10 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Text, View, StyleSheet, Image, Animated } from "react-native";
-import { RectButton, TouchableOpacity } from "react-native-gesture-handler";
-import { SharedElement } from "react-navigation-shared-element";
-import { PROJECT_CARD_WIDTH, SLIDE_WIDTH } from "../../constants/Layout";
+import { PROJECT_CARD_WIDTH } from "../../constants/Layout";
 import { Project } from "../../types";
 
 interface CardProps {
